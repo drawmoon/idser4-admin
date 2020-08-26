@@ -1,18 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "E:\\new-work\\my-repos\\idser4-admin\\New\\IdentityServer\\IdentityServer.csproj": {}
+    "D:\\profile\\code\\repos\\idser4-admin\\New\\IdentityServer\\IdentityServer.csproj": {}
   },
   "projects": {
-    "E:\\new-work\\my-repos\\idser4-admin\\New\\IdentityServer\\IdentityServer.csproj": {
+    "D:\\profile\\code\\repos\\idser4-admin\\New\\IdentityServer\\IdentityServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\new-work\\my-repos\\idser4-admin\\New\\IdentityServer\\IdentityServer.csproj",
+        "projectUniqueName": "D:\\profile\\code\\repos\\idser4-admin\\New\\IdentityServer\\IdentityServer.csproj",
         "projectName": "IdentityServer",
-        "projectPath": "E:\\new-work\\my-repos\\idser4-admin\\New\\IdentityServer\\IdentityServer.csproj",
+        "projectPath": "D:\\profile\\code\\repos\\idser4-admin\\New\\IdentityServer\\IdentityServer.csproj",
         "packagesPath": "C:\\Users\\lmqas\\.nuget\\packages\\",
-        "outputPath": "E:\\new-work\\my-repos\\idser4-admin\\New\\IdentityServer\\obj\\",
+        "outputPath": "D:\\profile\\code\\repos\\idser4-admin\\New\\IdentityServer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
           "C:\\Users\\lmqas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

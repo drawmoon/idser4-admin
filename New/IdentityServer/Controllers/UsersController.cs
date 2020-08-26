@@ -82,44 +82,32 @@ namespace IdentityServer.Controllers
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 添加用户角色
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("Roles")]
         public IActionResult PostUserRoles()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 删除用户角色
+        /// </summary>
+        /// <returns></returns>
         [HttpDelete("Roles")]
         public IActionResult DeleteUserRoles()
         {
             throw new NotImplementedException();
         }
 
-        [HttpGet("{id}/Claims")]
-        public IActionResult GetUserClaims()
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost("Claims")]
-        public IActionResult PostUserClaims()
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpDelete("{id}/Claims")]
-        public IActionResult DeleteUserClaims()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("ChangePassword")]
         public IActionResult PostChangePassword()
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet("{id}/RoleClaims")]
-        public IActionResult GetRoleClaims()
         {
             throw new NotImplementedException();
         }
