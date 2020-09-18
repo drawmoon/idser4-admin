@@ -270,13 +270,14 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
-/src/Skoruba.IdentityServer4.Admin/appsettings.production.json
-/src/Skoruba.IdentityServer4.Admin/Scripts/Libs/
-/src/Skoruba.IdentityServer4.Admin/Data/Migrations/
+/IdentityServer/appsettings.production.json
+/IdentityServer/Scripts/Libs/
+/IdentityServer/Data/Migrations/
 
 # Don't ignore these log folders
-!/src/Skoruba.IdentityServer4.Admin/Resources/Views/Log/
-!/src/Skoruba.IdentityServer4.Admin.BusinessLogic/Dtos/Log/
-!/src/Skoruba.IdentityServer4.Admin/Views/Log/
-!/src/Skoruba.IdentityServer4.Admin.BusinessLogic/Events/Log/
-/src/Skoruba.IdentityServer4.Admin.Api/appsettings.Production.json
+!/IdentityServer/Resources/Views/Log/
+!/IdentityServer.BusinessLogic/Dtos/Log/
+!/IdentityServer/Views/Log/
+!/IdentityServer.BusinessLogic/Events/Log/
+
+!/Skoruba.IdentityServer4.Admin/
