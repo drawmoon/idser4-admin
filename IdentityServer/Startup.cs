@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using HealthChecks.UI.Client;
 using IdentityServer.BusinessLogic.Identity.Dtos.Identity;
 using IdentityServer.Configuration;
@@ -12,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Skoruba.AuditLogging.EntityFramework.Entities;
 
 namespace IdentityServer
@@ -70,6 +73,27 @@ namespace IdentityServer
 
             // Add authorization policies for MVC
             RegisterAuthorization(services);
+            
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc(adminApiConfiguration.ApiVersion, new OpenApiInfo { Title = adminApiConfiguration.ApiName, Version = adminApiConfiguration.ApiVersion });
+
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Implicit = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri($"{adminApiConfiguration.IdentityServerBaseUrl}/connect/authorize"),
+                            Scopes = new Dictionary<string, string> {
+                                { adminApiConfiguration.OidcApiName, adminApiConfiguration.ApiName }
+                            }
+                        }
+                    }
+                });
+                options.OperationFilter<AuthorizeCheckOperationFilter>();
+            });
 
             // Add audit logging
             services.AddAuditEventLogging<AdminAuditLogDbContext, AuditLog>(Configuration);
