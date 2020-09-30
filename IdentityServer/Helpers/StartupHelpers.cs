@@ -20,6 +20,7 @@ using IdentityServer.EntityFramework.Shared.Configuration;
 using IdentityServer.EntityFramework.SqlServer.Extensions;
 using IdentityServer.ExceptionHandling;
 using IdentityServer.Helpers.Localization;
+using IdentityServer.Services;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -28,6 +29,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -37,6 +39,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SendGrid;
 using Skoruba.AuditLogging.EntityFramework.DbContexts;
 using Skoruba.AuditLogging.EntityFramework.Entities;
 using Skoruba.AuditLogging.EntityFramework.Extensions;
@@ -305,6 +308,33 @@ namespace IdentityServer.Helpers
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;
             });
+        }
+        
+        /// <summary>
+        /// Add email senders - configuration of sendgrid, smtp senders
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        public static void AddEmailSenders(this IServiceCollection services, IConfiguration configuration)
+        {
+            var smtpConfiguration = configuration.GetSection(nameof(SmtpConfiguration)).Get<SmtpConfiguration>();
+            var sendGridConfiguration = configuration.GetSection(nameof(SendgridConfiguration)).Get<SendgridConfiguration>();
+
+            if (sendGridConfiguration != null && !string.IsNullOrWhiteSpace(sendGridConfiguration.ApiKey))
+            {
+                services.AddSingleton<ISendGridClient>(_ => new SendGridClient(sendGridConfiguration.ApiKey));
+                services.AddSingleton(sendGridConfiguration);
+                services.AddTransient<IEmailSender, SendgridEmailSender>();
+            }
+            else if (smtpConfiguration != null && !string.IsNullOrWhiteSpace(smtpConfiguration.Host))
+            {
+                services.AddSingleton(smtpConfiguration);
+                services.AddTransient<IEmailSender, SmtpEmailSender>();
+            }
+            else
+            {
+                services.AddSingleton<IEmailSender, EmailSender>();
+            }
         }
 
         public static void AddAuthenticationServicesStaging<TContext, TUserIdentity, TUserIdentityRole>(
